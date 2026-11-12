@@ -1,0 +1,427 @@
+
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>VISUALSPACE</title>
+
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    color: #211b36;
+    background:
+        radial-gradient(circle at 10% 10%, #e5d2ff, transparent 35%),
+        radial-gradient(circle at 90% 40%, #d6eaff, transparent 35%),
+        #faf8ff;
+    min-height: 100vh;
+}
+
+header {
+    max-width: 860px;
+    margin: auto;
+    padding: 27px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo {
+    font-size: 17px;
+    font-weight: 800;
+    color: #17132b;
+}
+
+.logo span {
+    color: #9360ed;
+}
+
+nav {
+    display: flex;
+    gap: 25px;
+}
+
+nav a {
+    text-decoration: none;
+    color: #51476a;
+    font-size: 12px;
+    transition: 0.2s;
+}
+
+nav a:hover {
+    color: #9259ec;
+}
+
+.hero {
+    max-width: 808px;
+    margin: 25px auto 60px;
+    padding: 42px;
+    min-height: 325px;
+    border-radius: 23px;
+    background: rgba(255,255,255,0.72);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    box-shadow: 0 20px 60px rgba(100,80,150,0.08);
+}
+
+.hero-text {
+    max-width: 380px;
+}
+
+.small-title {
+    color: #9860ef;
+    font-size: 9px;
+    font-weight: bold;
+    letter-spacing: 3px;
+    margin-bottom: 17px;
+}
+
+h1 {
+    font-size: 49px;
+    line-height: 1.1;
+    letter-spacing: -2px;
+    margin-bottom: 19px;
+}
+
+h1 span {
+    color: #9860ef;
+}
+
+.hero p {
+    color: #91869e;
+    font-size: 11px;
+    line-height: 1.8;
+    margin-bottom: 20px;
+}
+
+.button {
+    display: inline-block;
+    background: #9160e9;
+    color: white;
+    padding: 12px 17px;
+    border-radius: 9px;
+    text-decoration: none;
+    font-size: 10px;
+    font-weight: bold;
+    transition: 0.2s;
+}
+
+.button:hover {
+    background: #7945d5;
+    transform: translateY(-2px);
+}
+
+.planet {
+    width: 190px;
+    height: 190px;
+    position: relative;
+    margin-right: 30px;
+    flex-shrink: 0;
+}
+
+.planet-circle {
+    position: absolute;
+    width: 140px;
+    height: 140px;
+    border-radius: 50%;
+    top: 25px;
+    left: 20px;
+    background: linear-gradient(135deg, #c69afc, #8655d9);
+    box-shadow: 0 15px 35px #b89ae966;
+}
+
+.ring {
+    position: absolute;
+    width: 180px;
+    height: 65px;
+    border: 8px solid #f2a8d5;
+    border-radius: 50%;
+    top: 65px;
+    left: -1px;
+    transform: rotate(-30deg);
+    z-index: 2;
+}
+
+.square {
+    position: absolute;
+    width: 60px;
+    height: 60px;
+    background: linear-gradient(135deg, #b9dcff, #83adfa);
+    border-radius: 17px;
+    top: -5px;
+    right: -5px;
+    transform: rotate(17deg);
+    z-index: 3;
+}
+
+.dot {
+    position: absolute;
+    width: 33px;
+    height: 33px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #ffd29b, #ff9bc9);
+    bottom: -3px;
+    left: -15px;
+}
+
+.collection {
+    max-width: 776px;
+    margin: auto;
+    padding: 0 20px 65px;
+}
+
+.collection h2 {
+    font-size: 23px;
+    margin-bottom: 21px;
+}
+
+.cards {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+}
+
+.card {
+    min-height: 195px;
+    padding: 19px;
+    border-radius: 19px;
+    position: relative;
+    overflow: hidden;
+    transition: 0.25s;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+}
+
+.card:nth-child(1) {
+    background: linear-gradient(135deg, #e3d1ff, #c7a8ff);
+}
+
+.card:nth-child(2) {
+    background: linear-gradient(135deg, #ffd9e9, #ffb7d7);
+}
+
+.card:nth-child(3) {
+    background: linear-gradient(135deg, #d8ebff, #a9cbff);
+}
+
+.number {
+    font-size: 10px;
+    position: relative;
+    z-index: 2;
+}
+
+.shape {
+    position: absolute;
+    width: 65px;
+    height: 65px;
+    right: 22px;
+    top: 23px;
+}
+
+.shape.one {
+    background: linear-gradient(135deg, #a982f0, #8052d5);
+    border-radius: 20px;
+    transform: rotate(25deg);
+}
+
+.shape.two {
+    background: linear-gradient(135deg, #f59bc9, #e86bb0);
+    border-radius: 50%;
+}
+
+.shape.three {
+    background: linear-gradient(135deg, #88bcfa, #5790e7);
+    border-radius: 20px 50% 20px 20px;
+    transform: rotate(25deg);
+}
+
+.card h3 {
+    position: absolute;
+    bottom: 36px;
+    left: 19px;
+    font-size: 17px;
+}
+
+.card p {
+    position: absolute;
+    bottom: 16px;
+    left: 19px;
+    font-size: 9px;
+    color: #645a79;
+}
+
+.extra {
+    max-width: 776px;
+    margin: 0 auto 60px;
+    padding: 35px 20px;
+    text-align: center;
+    background: rgba(255,255,255,0.65);
+    border-radius: 20px;
+}
+
+.extra h2 {
+    margin-bottom: 12px;
+}
+
+.extra p {
+    font-size: 13px;
+    color: #847a94;
+    line-height: 1.8;
+}
+
+footer {
+    text-align: center;
+    padding: 25px;
+    color: #9288a2;
+    font-size: 11px;
+}
+
+@media (max-width: 650px) {
+    header {
+        padding: 22px 18px;
+    }
+
+    nav {
+        gap: 13px;
+    }
+
+    nav a {
+        font-size: 10px;
+    }
+
+    .hero {
+        margin: 15px 15px 45px;
+        padding: 30px 24px;
+        min-height: 300px;
+    }
+
+    h1 {
+        font-size: 37px;
+    }
+
+    .planet {
+        transform: scale(0.7);
+        margin: 0 -35px 0 -15px;
+    }
+
+    .cards {
+        grid-template-columns: 1fr;
+    }
+
+    .card {
+        min-height: 170px;
+    }
+}
+
+@media (max-width: 420px) {
+    .hero {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .planet {
+        align-self: center;
+        margin: 10px 0 0;
+    }
+
+    h1 {
+        font-size: 39px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<header>
+    <div class="logo">VISUAL<span>SPACE</span></div>
+
+    <nav>
+        <a href="#home">Головна</a>
+        <a href="#collection">Колекція</a>
+        <a href="#design">Дизайн</a>
+    </nav>
+</header>
+
+<section class="hero" id="home">
+    <div class="hero-text">
+        <div class="small-title">CREATIVE DIGITAL WORLD</div>
+
+        <h1>Простір<br>нових ідей<span>.</span></h1>
+
+        <p>
+            Поєднання кольорів, форм і сучасного дизайну
+            в одному візуальному просторі.
+        </p>
+
+        <a href="#collection" class="button">
+            Дивитися колекцію ↗
+        </a>
+    </div>
+
+    <div class="planet">
+        <div class="planet-circle"></div>
+        <div class="ring"></div>
+        <div class="square"></div>
+        <div class="dot"></div>
+    </div>
+</section>
+
+<section class="collection" id="collection">
+    <div class="small-title">EXPLORE THE STYLE</div>
+    <h2>Візуальна колекція</h2>
+
+    <div class="cards">
+
+        <div class="card">
+            <span class="number">01</span>
+            <div class="shape one"></div>
+            <h3>Форми</h3>
+            <p>Геометрія та гармонія.</p>
+        </div>
+
+        <div class="card">
+            <span class="number">02</span>
+            <div class="shape two"></div>
+            <h3>Кольори</h3>
+            <p>Яскраві візуальні акценти.</p>
+        </div>
+
+        <div class="card">
+            <span class="number">03</span>
+            <div class="shape three"></div>
+            <h3>Простір</h3>
+            <p>Мінімалізм і баланс.</p>
+        </div>
+
+    </div>
+</section>
+
+<section class="extra" id="design">
+    <h2>Про цей сайт</h2>
+    <p>
+        Цей сайт був створений для ознайомлення
+        з різними кольорами, формами та елементами дизайну.
+        Тут можна побачити кілька прикладів їх поєднання.
+    </p>
+</section>
+
+<footer>
+    © 2026 VISUALSPACE. Усі права захищені.
+</footer>
+
+</body>
+</html>
